@@ -4,12 +4,14 @@ import Filter from "./Filter";
 import Item from "./Item";
 import { v4 as uuid } from "uuid";
 
-function ShoppingList({ items, setItems, search, onSearchChange }) {
+function ShoppingList({ items, setItems}) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const [itemData, setItemData] = useState({name:"", category:"Produce"});
 
   const [selected, setSelected] = useState("Produce"); // Declare a state variable
+
+  const [search, setSearch] = useState("");
 
 
   
@@ -65,7 +67,7 @@ function ShoppingList({ items, setItems, search, onSearchChange }) {
   return (
     <div className="ShoppingList">
       <ItemForm itemData={itemData} handleChange={handleChange} onItemFormSubmit={onItemFormSubmit} selected={selected} setSelected={setSelected} />
-      <Filter onCategoryChange={handleCategoryChange} search={search} onSearchChange={onSearchChange} />
+      <Filter onCategoryChange={handleCategoryChange} search={search} onSearchChange={setSearch} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
